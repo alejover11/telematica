@@ -13,4 +13,8 @@ indexCtrl.renderAbout = (req, res) => {
 indexCtrl.renderHome = (req, res) => {
   res.render('home');
 };
+
+indexCtrl.renderEncuesta = (req, res) => {
+  res.render('encuesta');
+};
 module.exports = indexCtrl;

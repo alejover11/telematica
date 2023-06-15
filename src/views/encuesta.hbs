@@ -1,0 +1,236 @@
+  <!DOCTYPE html>
+<html>
+<head>
+  <title>Encuesta Universitaria</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .header {
+      background-color: #f5f5f5;
+      padding: 50px;
+      text-align: center;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: calc(100vh - 40px);
+    }
+
+    .formulario {
+      width: 400px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+
+    .formulario label,
+    .formulario select,
+    .formulario input[type="button"] {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .formulario input[type="button"] {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .resultado {
+      margin-top: 20px;
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
+  <script>
+    function buscarSalon() {
+      var nombre = document.getElementById("nombre").value;
+      var identificacion = document.getElementById("identificacion").value;
+      var carrera = document.getElementById("carrera").value;
+      var semestre = document.getElementById("semestre").value;
+      var materia = document.getElementById("materia").value;
+
+      // Verificar si se seleccionó "Otra" materia
+      if (materia === "otra") {
+        materia = document.getElementById("otraMateria").value;
+      }
+
+      // Aquí puedes agregar la lógica para asignar los salones según las selecciones del usuario
+
+      // Ejemplo de asignación aleatoria de salón
+      var salon = Math.floor(Math.random() * 125) + 1;
+
+      document.getElementById("resultado").innerHTML = `
+        Nombre: ${nombre}<br>
+        Identificación: ${identificacion}<br>
+        Carrera: ${carrera}<br>
+        Semestre: ${semestre}<br>
+        Materia: ${materia}<br>
+        Salón asignado: ${salon}
+      `;
+    }
+
+    function toggleOtraMateria() {
+      var materia = document.getElementById("materia").value;
+      var otraMateriaContainer = document.getElementById("otraMateriaContainer");
+
+      if (materia === "otra") {
+        otraMateriaContainer.style.display = "block";
+      } else {
+        otraMateriaContainer.style.display = "none";
+      }
+    }
+
+    function actualizarMaterias() {
+      var carrera = document.getElementById("carrera").value;
+      var semestre = document.getElementById("semestre").value;
+      var materiaSelect = document.getElementById("materia");
+      var otraMateriaContainer = document.getElementById("otraMateriaContainer");
+
+      // Reiniciar las opciones de materias
+      materiaSelect.innerHTML = "";
+
+      if (carrera === "Ingeniería electrónica") {
+        if (semestre === "Semestre 1") {
+          agregarMaterias(["Circuitos Electrónicos", "Programación de Microcontroladores", "Matemáticas Avanzadas", "Física Electrónica", "Sistemas Digitales"]);
+        } else if (semestre === "Semestre 2") {
+          agregarMaterias(["Electrónica de Potencia", "Comunicaciones Electrónicas", "Señales y Sistemas", "Microprocesadores", "Control Automático"]);
+        } else if (semestre === "Semestre 3") {
+          agregarMaterias(["Electrónica Analógica", "Electrónica Digital", "Telecomunicaciones", "Instrumentación Electrónica", "Sistemas Embebidos"]);
+        } else if (semestre === "Semestre 4") {
+          agregarMaterias(["Electrónica de Comunicaciones", "Electrónica Industrial", "Redes de Datos", "Procesamiento Digital de Señales", "Robótica"]);
+        } else if (semestre === "Semestre 5") {
+          agregarMaterias(["Sistemas de Comunicación", "Electrónica Avanzada", "Redes Inalámbricas", "Electrónica de Potencia Avanzada", "Inteligencia Artificial"]);
+        }
+      } else if (carrera === "Medicina") {
+        if (semestre === "Semestre 1") {
+          agregarMaterias(["Anatomía", "Fisiología", "Bioquímica", "Histología", "Embriología"]);
+        } else if (semestre === "Semestre 2") {
+          agregarMaterias(["Farmacología", "Patología General", "Microbiología", "Inmunología", "Parasitología"]);
+        } else if (semestre === "Semestre 3") {
+          agregarMaterias(["Patología Especial", "Bioética", "Genética Médica", "Epidemiología", "Medicina Preventiva"]);
+        } else if (semestre === "Semestre 4") {
+          agregarMaterias(["Medicina Interna", "Cirugía", "Pediatría", "Ginecología", "Obstetricia"]);
+        } else if (semestre === "Semestre 5") {
+          agregarMaterias(["Psiquiatría", "Radiología", "Dermatología", "Oftalmología", "Otorrinolaringología"]);
+        }
+      } else if (carrera === "Administración de Empresas") {
+        if (semestre === "Semestre 1") {
+          agregarMaterias(["Introducción a la Administración", "Matemáticas para la Administración", "Introducción al Derecho", "Economía", "Contabilidad"]);
+        } else if (semestre === "Semestre 2") {
+          agregarMaterias(["Estadística Aplicada", "Finanzas", "Marketing", "Gestión de Recursos Humanos", "Administración de Operaciones"]);
+        } else if (semestre === "Semestre 3") {
+          agregarMaterias(["Comportamiento Organizacional", "Gestión Estratégica", "Derecho Empresarial", "Gestión de la Calidad", "Administración de Proyectos"]);
+        } else if (semestre === "Semestre 4") {
+          agregarMaterias(["Negociación", "Dirección de Equipos de Trabajo", "Comunicación Empresarial", "Logística y Distribución", "Mercadotecnia Estratégica"]);
+        } else if (semestre === "Semestre 5") {
+          agregarMaterias(["Ética Empresarial", "Sistemas de Información Gerencial", "Consultoría Empresarial", "Responsabilidad Social Corporativa", "Emprendimiento"]);
+        }
+      } else if (carrera === "biología") {
+        if (semestre === "Semestre 1") {
+          agregarMaterias(["Biología Celular", "Química General", "Álgebra", "Estadística", "Introducción a la Biología"]);
+        } else if (semestre === "Semestre 2") {
+          agregarMaterias(["Microbiología", "Química Orgánica", "Cálculo Integral", "Genética", "Biología Molecular"]);
+        } else if (semestre === "Semestre 3") {
+          agregarMaterias(["Fisiología Vegetal", "Fisiología Animal", "Bioquímica", "Ecología", "Biología del Desarrollo"]);
+        } else if (semestre === "Semestre 4") {
+          agregarMaterias(["Biología Evolutiva", "Biología Molecular Avanzada", "Biotecnología", "Botánica", "Zoología"]);
+        } else if (semestre === "Semestre 5") {
+          agregarMaterias(["Biología Marina", "Biología Celular Avanzada", "Microbiología Avanzada", "Biología Ambiental", "Biología Humana"]);
+        }
+      } else if (carrera === "Derecho") {
+        if (semestre === "Semestre 1") {
+          agregarMaterias(["Introducción al Derecho", "Derecho Romano", "Teoría General del Proceso", "Sociología Jurídica", "Filosofía del Derecho"]);
+        } else if (semestre === "Semestre 2") {
+          agregarMaterias(["Derecho Civil", "Derecho Constitucional", "Derecho Penal", "Derecho Administrativo", "Derecho Internacional Público"]);
+        } else if (semestre === "Semestre 3") {
+          agregarMaterias(["Derecho Laboral", "Derecho Mercantil", "Derecho Internacional Privado", "Derecho Procesal Civil", "Derecho Procesal Penal"]);
+        } else if (semestre === "Semestre 4") {
+          agregarMaterias(["Derecho Financiero", "Derecho de la Seguridad Social", "Derecho Notarial", "Derecho Procesal Laboral", "Derecho Procesal Administrativo"]);
+        } else if (semestre === "Semestre 5") {
+          agregarMaterias(["Derecho Tributario", "Derecho de Familia", "Derecho Procesal Constitucional", "Derecho Ambiental", "Derecho de la Propiedad Intelectual"]);
+        }
+      }
+
+      toggleOtraMateria();
+    }
+
+    function agregarMaterias(materias) {
+      var materiaSelect = document.getElementById("materia");
+
+      for (var i = 0; i < materias.length; i++) {
+        var option = document.createElement("option");
+        option.value = materias[i];
+        option.textContent = materias[i];
+        materiaSelect.appendChild(option);
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="header">
+    <h1>Encuesta Universitaria</h1>
+  </div>
+
+  <div class="container">
+    <div class="formulario">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre">
+
+      <label for="identificacion">Identificación:</label>
+      <input type="text" id="identificacion">
+
+      <label for="carrera">Carrera:</label>
+      <select id="carrera" onchange="actualizarMaterias()">
+     <option value="">Seleccionar</option>
+     <option value="Ingeniería electrónica">Ingeniería electrónica</option>
+     <option value="Medicina">Medicina</option>
+     <option value="Administración de Empresas">Administración de Empresas</option>
+     <option value="biología">Biología</option>
+     <option value="Derecho">Derecho</option>
+     </select>
+
+
+      <label for="semestre">Semestre:</label>
+      <select id="semestre" onchange="actualizarMaterias()">
+        <option value="">Seleccionar</option>
+        <option value="Semestre 1">Semestre 1</option>
+        <option value="Semestre 2">Semestre 2</option>
+        <option value="Semestre 3">Semestre 3</option>
+        <option value="Semestre 4">Semestre 4</option>
+        <option value="Semestre 5">Semestre 5</option>
+      </select>
+
+      <label for="materia">Materia:</label>
+      <select id="materia">
+        <option value="">Seleccionar</option>
+        <option value="otra">Otra</option>
+      </select>
+
+      <div id="otraMateriaContainer" style="display: none;">
+        <label for="otraMateria">Otra materia:</label>
+        <input type="text" id="otraMateria">
+      </div>
+
+      <input type="button" value="Buscar Salón" onclick="buscarSalon()">
+    </div>
+  </div>
+
+  <div class="resultado" id="resultado"></div>
+</body>
+</html>
+
+
+
+
+
+
